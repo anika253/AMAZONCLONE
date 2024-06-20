@@ -1,0 +1,20 @@
+.checkout__ad {
+  width: 100%;
+  max-width: 500px; /* Set a maximum width for the image */
+  height: auto; /* This will maintain the aspect ratio of the image */
+  margin-bottom: 10px;
+  display: block; /* This will ensure the image stays within its container */
+}
+
+.checkout__title {
+  margin-right: 10px;
+  padding: 10px;
+  border-bottom: 1 px solid lightgray;
+}
+
+.checkout {
+  display: flex;
+  padding: 20px;
+  background-color: white;
+  height: max-content;
+}

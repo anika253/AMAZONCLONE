@@ -1,0 +1,19 @@
+.home__image {
+  width: 100%;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+  z-index: -1; /*overlap , i want if anything is in front of it ..it should go behind*/
+  margin-bottom: -150px; /*in order to move the product card over them,space reduce, this will move it up*/
+}
+/*1 opacity at top and lower or 0.5 opacity at bottom*/
+.home {
+  max-width: 1500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.home__row {
+  display: flex;
+  z-index: 1;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+/* hooks - always function based components*/
