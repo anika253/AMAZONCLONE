@@ -1,36 +1,57 @@
 import React, { useState } from "react";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 function Login() {
   const [role, setRole] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [documentId, setDocumentId] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [numOfLaborers, setNumOfLaborers] = useState("");
-  console.log("---------------------------------------------------------");
 
   const handleRoleChange = (e) => {
     setRole(e.target.value);
-    // Reset other form fields when switching roles
-    setName("");
-    setAddress("");
-    setDocumentId("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitted:", {
-      role,
-      name,
-      address,
-      documentId,
-      numOfLaborers,
-    });
+    console.log("submitted");
+    try {
+      // const db = app.firestre();
+
+      const formData = {
+        role,
+        name,
+        address,
+        documentId,
+        phoneNumber,
+        numOfLaborers,
+        employee_type: "contractor",
+      };
+      const formDataRef = collection(db, "employees");
+      await addDoc(formDataRef, formData);
+      // await db
+      //   .collection("employees")
+      //   .add(formData)
+      //   .then((docRef) => {
+      //     console.log("Document written with ID: ", docRef.id);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error adding document: ", error);
+      //   });
+
+      console.log("Data saved successfully!");
+    } catch (error) {
+      console.error("Error saving data:", error);
+    }
   };
 
   return (
     <div className="max-w-lg mx-auto">
       <h2 className="text-2xl font-bold mb-4">Apply for the Jobs!</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Role selection */}
         <div>
           <div className="flex items-center">
             <input
@@ -57,6 +78,7 @@ function Login() {
             <label htmlFor="contractor">Contractor</label>
           </div>
         </div>
+        {/* Number of laborers input */}
         {role === "contractor" && (
           <div>
             <label htmlFor="numOfLaborers" className="block mb-2">
@@ -73,6 +95,7 @@ function Login() {
             />
           </div>
         )}
+        {/* Name input */}
         <div>
           <label htmlFor="name" className="block mb-2">
             Name:
@@ -87,6 +110,7 @@ function Login() {
             required
           />
         </div>
+        {/* Address input */}
         <div>
           <label htmlFor="address" className="block mb-2">
             Address:
@@ -94,51 +118,48 @@ function Login() {
           <input
             type="text"
             id="address"
-            name="proper address for work location"
+            name="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            placeholder="work location"
+            placeholder="Enter your address"
             className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
             required
           />
         </div>
-        <label for="pincode" class="block mb-2">
-          PIN code:
-        </label>
-        <input
-          type="number"
-          id="pincode"
-          name="pincode"
-          class="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
+        {/* Document ID selection */}
+        <label htmlFor="documentId">Choose Your Document ID:</label>
+        <select
+          id="documentId"
+          name="documentId"
+          value={documentId}
+          onChange={(e) => setDocumentId(e.target.value)}
           required
-        />
-
-        <label for="documentId">Choose Your Document ID:</label>
-        <select id="documentId" name="documentId" required>
+        >
           <option value="">Select Document Type</option>
           <option value="AADHAR CARD">AADHAR CARD</option>
           <option value="DRIVING LICENSE">DRIVING LICENSE</option>
           <option value="RATION CARD">RATION CARD</option>
         </select>
+        {/* Phone number input */}
         <div>
-          <label htmlFor="documentId" className="block mb-2">
-            Document ID NUMBER:
+          <label htmlFor="phoneNumber" className="block mb-2">
+            Phone Number:
           </label>
           <input
-            type="text"
-            id="documentId"
-            name="documentId"
-            value={documentId}
-            onChange={(e) => setDocumentId(e.target.value)}
+            type="tel"
+            id="phoneNumber"
+            name="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
             className="w-full px-4 py-2 mb-4 border rounded-md focus:outline-none focus:border-blue-500"
             required
           />
         </div>
-
+        {/* Submit button */}
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          disabled={!role}
+          // disabled={!role}
         >
           SUBMIT
         </button>

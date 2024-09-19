@@ -1,7 +1,7 @@
 import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
-// import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { app } from "./firebase";
 import Home from "./pages/Home";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
