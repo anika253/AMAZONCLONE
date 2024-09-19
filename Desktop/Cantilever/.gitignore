@@ -1,0 +1,21 @@
+# Ignore Windows system directories
+/Application Data/
+/Cookies/
+/Local Settings/
+/My Documents/
+/NetHood/
+/PrintHood/
+/Recent/
+/SendTo/
+/Start Menu/
+/Templates/
+/AppData/
+/Contacts/
+
+# Ignore personal files
+*.pdf
+*.docx
+*.pptx
+*.mp4
+*.jpg
+*.png
