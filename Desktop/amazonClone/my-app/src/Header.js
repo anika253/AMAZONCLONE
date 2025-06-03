@@ -8,7 +8,7 @@ import { getAuth, createUserwithEmailAndPassword } from "firebase/auth";
 import { auth } from "./firebase";
 
 function Header() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }] = useStateValue();// hooks array 
   const login = () => {
     if (user) {
       auth.signOut();
